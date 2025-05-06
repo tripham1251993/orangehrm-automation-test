@@ -8,6 +8,9 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main, master]
+    paths:
+      - tests/tests/api/**
+      - .github/workflows/playwright-api.yml
 jobs:
   test:
     timeout-minutes: 60

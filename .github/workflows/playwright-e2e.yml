@@ -9,6 +9,10 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main, master]
+    paths:
+      - tests/tests/e2e/**
+      - .github/workflows/playwright-e2e.yml
+      - tests/pageObjects/**
 jobs:
   test:
     timeout-minutes: 60
