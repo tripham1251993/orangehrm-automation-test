@@ -2,8 +2,15 @@ name: Performance Tests
 on:
   push:
     branches: [main, master]
+    paths:
+      - 'tests/performance/**'
+      - .github/workflows/performance.yml
   pull_request:
     branches: [main, master]
+    paths:
+      - 'tests/performance/**'
+      - .github/workflows/performance.yml
+  workflow_dispatch:
 jobs:
   test:
     timeout-minutes: 60
@@ -16,6 +23,9 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+      - name: Install k6
+        run: |
+          sudo apt-get install -y k6
       - name: Run Performance tests
         run: |
           npm run test:performance
