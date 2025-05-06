@@ -23,19 +23,44 @@ orangehrm-automation-test/
 └── tests/                    # Main test directory
     ├── cookies.json          # Saved authentication cookies
     ├── eslint.config.mjs     # ESLint configuration
-    ├── k6-results.json       # API performance test results
     ├── package.json          # Test dependencies
     ├── playwright.config.ts  # Playwright configuration
     ├── README.md             # Testing documentation
     ├── results.xml           # JUnit test results
     ├── allure-results/       # Allure reporting artifacts
     ├── pageObjects/          # Page Object Models
-    │   └── globalMenu.ts     # Global menu interactions
+    │   ├── basePage.ts       # Base class for all page objects
+    │   ├── globalMenu.ts     # Global menu interactions
+    │   └── homePage.ts       # Home page interactions
     ├── playwright-report/    # HTML test reports
     ├── test-results/         # Test execution artifacts
     ├── tests/                # Test implementation files
+    │   ├── api/              # API test implementations
+    │   │   └── employees.spec.ts # Employee API tests
+    │   └── e2e/              # End-to-end UI test implementations
+    │       ├── login.spec.ts # Login tests
+    │       └── dashboard.spec.ts # Dashboard tests
     └── util/                 # Helper utilities
+        └── cookieHelper.ts   # Cookie management helpers
 ```
+
+## Page Object Model Architecture
+
+The framework implements the Page Object Model (POM) design pattern with a `BasePage` class as the foundation:
+
+- **BasePage**: Abstract base class that all page objects inherit from
+  - Manages the Playwright `Page` object
+  - Provides common methods like `waitForElementEditable`
+  - Defines abstract methods that child classes must implement
+  - Centralizes UI interaction logic for better maintainability
+
+- **Specific Page Objects**: (HomePage, GlobalMenu, etc.)
+  - Extend BasePage
+  - Implement page-specific functionality
+  - Isolate UI changes to page objects
+  - Simplify test maintenance
+
+This architecture separates test logic from UI interaction, making tests more maintainable when the UI changes.
 
 ## Getting Started
 

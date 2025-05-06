@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test'
+import { BasePage } from './basePage'
 
-export class HomePage {
-  private page: Page
+export class HomePage extends BasePage {
   readonly usernameInput: Locator
   readonly passwordInput: Locator
   readonly loginButton: Locator
@@ -9,16 +9,12 @@ export class HomePage {
   readonly logo: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.usernameInput = page.locator('input[name="username"]')
     this.passwordInput = page.locator('input[name="password"]')
     this.loginButton = page.locator('.orangehrm-login-button')
     this.forgotPasswordLink = page.locator('.orangehrm-login-forgot-header')
     this.logo = page.locator('.orangehrm-login-branding img')
-  }
-
-  setPage(page: Page) {
-    this.page = page
   }
 
   async navigateTo() {

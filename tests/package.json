@@ -15,7 +15,6 @@
     "test:e2e-firefox": "npx playwright test tests/e2e --project=firefox --headed",
     "test:e2e-firefox:ci": "npx playwright test tests/e2e --project=firefox",
     "serve-report": "npx allure serve allure-results"
-    
   },
   "keywords": [],
   "author": "",

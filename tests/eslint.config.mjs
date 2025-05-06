@@ -8,6 +8,11 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['playwright-report/'],
+    ignores: [
+      'playwright-report/',
+      'node_modules/',
+      'allure-results/',
+      'test-results/',
+    ],
   },
 ]

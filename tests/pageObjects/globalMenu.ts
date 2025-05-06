@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test'
+import { BasePage } from './basePage'
 
-export class GlobalMenu {
-  private page: Page
+export class GlobalMenu extends BasePage {
   readonly searchInput: Locator
   readonly adminMenu: Locator
   readonly pimMenu: Locator
@@ -15,8 +15,10 @@ export class GlobalMenu {
   readonly claimMenu: Locator
   readonly buzzMenu: Locator
 
+  readonly menuMapping: object
+
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.searchInput = page.locator('input[placeholder="Search"]')
     this.adminMenu = page.locator(
       'a[href="/web/index.php/admin/viewAdminModule"]'
@@ -43,14 +45,37 @@ export class GlobalMenu {
       'a[href="/web/index.php/claim/viewClaimModule"]'
     )
     this.buzzMenu = page.locator('a[href="/web/index.php/buzz/viewBuzz"]')
+
+    this.menuMapping = {
+      Admin: this.adminMenu,
+      PIM: this.pimMenu,
+      Leave: this.leaveMenu,
+      Time: this.timeMenu,
+      Recruitment: this.recruitmentMenu,
+      'My Info': this.myInfoMenu,
+      Performance: this.performanceMenu,
+      Dashboard: this.dashboardMenu,
+      Maintenance: this.maintenanceMenu,
+      Claim: this.claimMenu,
+      Buzz: this.buzzMenu,
+    }
   }
 
-  setPage(page: Page) {
-    this.page = page
+  getMenuByName(name: string): Locator {
+    const menu = this.menuMapping[name]
+    if (!menu) {
+      throw new Error(`Menu with name "${name}" not found`)
+    }
+    return menu
+  }
+
+  async waitForPageLoaded(timeout: number = 10000) {
+    await this.page.waitForLoadState('networkidle', { timeout })
+    await this.dashboardMenu.waitFor({ state: 'visible', timeout })
   }
 
   async search(query: string) {
-    await this.searchInput.fill(query)
+    await this.searchInput.fill(query, { force: true })
     await this.searchInput.press('Enter')
     await this.page.waitForTimeout(300)
   }
