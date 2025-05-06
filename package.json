@@ -1,0 +1,43 @@
+{
+  "name": "orangehrm-automation-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format:check": "npx prettier --check .",
+    "format:fix": "npx prettier --write .",
+    "lint:check": "npx eslint .",
+    "lint:fix": "npx eslint --fix .",
+    "test:api": "npx playwright test tests/api --project=chromium",
+    "test:e2e-chromium": "npx playwright test tests/e2e --project=chromium --headed",
+    "test:e2e-chromium:ci": "npx playwright test tests/e2e --project=chromium",
+    "test:e2e-firefox": "npx playwright test tests/e2e --project=firefox --headed",
+    "test:e2e-firefox:ci": "npx playwright test tests/e2e --project=firefox",
+    "test:performance": "npx k6 run --out json=./k6-results.json --http-debug=full tests/performance/performance.js",
+    "serve-report": "npx allure serve allure-results"
+    
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tripham1251993/orangehrm-automation-test/issues"
+  },
+  "homepage": "https://github.com/tripham1251993/orangehrm-automation-test#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@faker-js/faker": "^9.7.0",
+    "@playwright/test": "^1.52.0",
+    "@types/k6": "^1.0.2",
+    "@types/node": "^22.15.11",
+    "allure-playwright": "^3.2.1",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "globals": "^16.0.0",
+    "k6": "^0.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.0"
+  }
+}
