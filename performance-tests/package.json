@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "scripts": {
+    "test:performance": "k6 run --out json=./k6-results.json --http-debug=full performance.js",
+    "test:performance:ci": "k6 run --out json=./k6-results.json performance.js"
+  },
+  "devDependencies": {
+    "k6": "^0.0.0"
+  }
+}

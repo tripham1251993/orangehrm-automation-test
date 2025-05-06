@@ -3,7 +3,7 @@ on:
   push:
     branches: [main, master]
     paths:
-      - 'tests/performance/**'
+      - 'performance-tests/**'
       - .github/workflows/performance.yml
   pull_request:
     branches: [main, master]
@@ -32,10 +32,11 @@ jobs:
           sudo apt install k6 -y
       - name: Run Performance tests
         run: |
-          k6 run --out json=./k6-results.json --http-debug=full tests/performance/performance.js
+          cd performance-tests
+          npm run test:performance:ci
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: k6-results
-          path: ./k6-results.json
+          path: performance-tests/k6-results.json
           retention-days: 30
