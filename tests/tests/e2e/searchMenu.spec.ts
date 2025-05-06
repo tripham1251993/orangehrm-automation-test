@@ -35,12 +35,12 @@ test.describe(
 
       await globalMenu.waitForElementEditable(globalMenu.searchInput, 30000)
 
-      menuNames.forEach(async (menuName) => {
+      for (const menuName of menuNames) {
         await globalMenu.search(menuName)
         const menu = globalMenu.getMenuByName(menuName)
         await menu.waitFor({ state: 'visible', timeout: 10000 })
         expect(await menu.isVisible()).toBeTruthy()
-      })
+      }
     })
   }
 )
