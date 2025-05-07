@@ -18,7 +18,7 @@ test.describe(
     })
 
     // eslint-disable-next-line
-    test('Should be able to filter all menu', async ({ page }) => {
+    test('Should be able to filter all menus', async ({ page }) => {
       const menuNames = [
         'Admin',
         'PIM',
